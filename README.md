@@ -18,6 +18,7 @@ To simplify the installation, it is recommended to get the latest [Anaconda](htt
 ### Graphviz (for Decision Tree visualization)
 The additional requirement of **demo03.ipynb**:
 * python-graphviz >= 0.8.2
+
 With anaconda installation, please execute the following command in the Anaconda Prompt:
     ```
     conda install python-graphviz
@@ -31,9 +32,10 @@ The additional requirement of The sample code in the subsequent classes requires
     conda install -c conda-forge tensorflow
     conda install -c conda-forge keras
     ```
-After the installation, please edit the `keras.json` with the pure text editor, and make sure the value of the `backend` should be set to `tensorflow` (default: `theano`). You can find your `keras.json` in the following locations:
+After the installation, please edit the `keras.json` with the pure text editor, and make sure the value of the `backend` should be set to `tensorflow` (default: `theano`).
+
+You can find your `keras.json` in the following locations:
 * Windows: `%USERPROFILE%\.keras\keras.json`.
-For example: `C:\Users\your_name\.keras\keras.json`
 * Mac OS and Linux: `~/.keras/keras.json`
 
 ## Sample Code Brief
