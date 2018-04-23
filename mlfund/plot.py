@@ -27,7 +27,7 @@ class ColorHelper(object):
 
 class PlotBase(object):
     def __init__(self):
-        self.palette = ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#00FFFF', '#000000']
+        self.palette = ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#00FFFF', '#000088', '#880000', '#008800', '#888800', '#880088', '#008888']
         for i in range(0, len(self.palette)):
             self.palette[i] = ColorHelper.mix_alpha(self.palette[i], 0.4)
             
@@ -40,6 +40,9 @@ class PlotBase(object):
     def show(self):
         plt.show()
 
+    def title(self, title_str):
+        plt.title(title_str)
+
     def save2Png(self, filename):
         plt.savefig(filename, format='png', dpi=144)
 
@@ -50,7 +53,7 @@ class PlotBase(object):
 class Plot3D(PlotBase):
     def __init__(self):
         PlotBase.__init__(self)
-        self.fig = plt.figure()
+        self.fig = plt.figure(figsize=(10,8))
         self.ax = Axes3D(self.fig)
         
     def scatter(self, X, y):
