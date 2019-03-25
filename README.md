@@ -16,7 +16,7 @@ All jupyter notebook sample code are developed based on Python 3, Scikit-Learn a
 3. Install all dependencies:
     - You can do it by:
         ```
-        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl graphviz opencv-python
+        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python
         ```
     - Or navigate to the folder of git repository, then install the dependencies by `requirement.txt` as below :
         ```
