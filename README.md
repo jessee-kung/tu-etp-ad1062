@@ -25,6 +25,7 @@ All jupyter notebook sample code are developed based on Python 3, Scikit-Learn a
         ```
 
 Done!
+
 ----
 ## Usage
 Launch jupyter notebook for execution of sample code and playground:
