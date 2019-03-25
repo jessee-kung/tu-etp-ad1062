@@ -4,42 +4,28 @@
 
 For more information, please refer to: https://sites.google.com/view/tu-ad1062-mlfundamentals/
 
-## Pre-requisites
-All sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please follow the steps listed below:
+----
+## Installation
+All jupyter notebook sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please follow the steps listed below:
 1. Install Python 3.7
 (For more details, see: [Appendix 1](#appendix-1\.-install-python-3\.7-and-related-dependencies))
 2. Clone the git repository:
     ```
     $ git clone https://github.com/jessee-kung/tu-etp-ad1062.git
     ```
-3. Navigate to the folder of git repository, then install dependencies
-    ```
-    $ cd tu-etp-ad1062
-    # pip install -r requirement.txt 
-    ```
+3. Install all dependencies:
+    - You can do it by:
+        ```
+        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl graphviz opencv-python
+        ```
+    - Or navigate to the folder of git repository, then install the dependencies by `requirement.txt` as below :
+        ```
+        $ cd tu-etp-ad1062
+        $ pip3 install -r requirement.txt 
+        ```
+
 Done!
-
-> ## Frequently Asked Questions:
-> ### 1. May I use Python 2.7?
-> Not recommended. Sample code are tested with Python 3.x only.
-> 
-> ### 2. May I use Anaconda or WinPython?
-> You can also use Anaconda or WinPython based on Python 3, too. But it is not required, due to these integrated packages provides more components which may not used in this course (and occupies more disk space). You also have to install Keras and Tensorflow later after you install the Anaconda or WinPython.
-> 
-> ### 3. Keeps showing "No module named 'theano'" error?
-> If you already have an earlier version of Keras installed, make sure the value of `backend` attribute should be `tensorflow`:
-> ```
-> {
->    "image_data_format": "channels_last",
->    "epsilon": 1e-07,
->    "floatx": "float32",
->    "backend": "tensorflow"
-> }
-> ```
-> You can find your `keras.json` in the following locations:
-> * Windows: `%USERPROFILE%\.keras\keras.json`.
-> * Mac OS and Linux: `~/.keras/keras.json`
-
+----
 ## Usage
 Launch jupyter notebook for execution of sample code and playground:
 ```
@@ -63,15 +49,38 @@ Here's the summary of each `*.ipynb`:
 * **demo08.ipynb**: Ch8. Dimension Reduction
     * Dimension reduction of PCA, LDA, and t-SNE
 
+----
+## Frequently Asked Questions:
+### 1. May I use Python 2.7?
+Not recommended. Sample code are tested with Python 3.x only.
 
-## Appendix 1. Install Python 3.7 and Related Dependencies
-### Windows
+### 2. May I use Anaconda or WinPython?
+You can also use Anaconda or WinPython based on Python 3, too. But it is not required, due to these integrated packages provides more components which may not used in this course (and occupies more disk space). You also have to install Keras and Tensorflow later after you install the Anaconda or WinPython.
+
+### 3. Keeps showing "No module named 'theano'" error?
+If you already have an earlier version of Keras installed, make sure the value of `backend` attribute should be `tensorflow`:
+```
+{
+   "image_data_format": "channels_last",
+   "epsilon": 1e-07,
+   "floatx": "float32",
+   "backend": "tensorflow"
+}
+```
+You can find your `keras.json` in the following locations:
+* Windows: `%USERPROFILE%\.keras\keras.json`.
+* Mac OS and Linux: `~/.keras/keras.json`
+
+----
+## Appendix
+### Install Python 3.7 and Related Dependencies
+#### Windows
+Get the installation package from: https://www.python.org/downloads/release/python-372/
+
+#### macOS
 (TBD)
 
-### macOS
-(TBD)
-
-### Linux
+#### Linux
 Please manually install Python 3.7 by steps listed as follows, with elevated user privileges (e.g., `sudo` with each command or `su - root` first):
 1. Make sure that all dependencies of building Python is satisfied, including `gcc`, `bzip2-devel`, `openssl-devel` and `libffi-devel`. You can installed by the commands listed below if your Linux distribution matches one of them:
     - On Ubuntu, or Debian:
@@ -100,14 +109,3 @@ Please manually install Python 3.7 by steps listed as follows, with elevated use
     ```
     python3 --version
     ```
-
-## Appendix 2. Package List Used
-The sample code is developed and tested with (but not limited to) following packages:
-* Python >= 3.6
-* scikit-Learn >= 0.19.1
-* numpy >= 1.12.1
-* matplotlib >= 2.1.1
-* graphviz >= 2.38.0
-* python-graphviz >= 0.8.2
-* tensorflow >= 1.4.0
-* keras >= 2.1.2
