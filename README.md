@@ -8,12 +8,18 @@ For more information, please refer to: https://sites.google.com/view/tu-ad1062-m
 ## Installation
 All jupyter notebook sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please follow the steps listed below:
 1. Install Python 3.7
-(For more details, see: [Appendix 1](#appendix-1\.-install-python-3\.7-and-related-dependencies))
+(For more details, see: [Appendix：How to Install Python 3.7 and Related Dependencies Manually?](#appendix))
 2. Clone the git repository:
     ```
     $ git clone https://github.com/jessee-kung/tu-etp-ad1062.git
     ```
-3. Install all dependencies:
+3. **(Optional)** Create a virtual environment under the repository folder and activate it if you want to have an isolated environment:
+    ```
+    $ mkdir .venv
+    $ python3 -m venv /your/path/to/tu-etp-ad1062/.venv
+    $ source .venv/bin/activate
+    ```
+4. Install all dependencies:
     - You can do it by:
         ```
         $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python
@@ -74,15 +80,28 @@ You can find your `keras.json` in the following locations:
 
 ----
 ## Appendix
-### Install Python 3.7 and Related Dependencies
+### How to Install Python 3.7 and Related Dependencies Manually?
 #### Windows
-Get the installation package from: https://www.python.org/downloads/release/python-372/
+Get the installation package directly from the Python official website:
+https://www.python.org/downloads/release/python-372/
 
 #### macOS
-(TBD)
+1. Install Xcode and Homebrew first:
+    ```
+    $ xcode-select --install
+    $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    ```
+2. Install Python 3:
+    ```
+    $ brew install python3
+    ```
+3. Make sure your Python 3.7 is worked:
+    ```
+    $ python3 --version
+    ```
 
 #### Linux
-Please manually install Python 3.7 by steps listed as follows, with elevated user privileges (e.g., `sudo` with each command or `su - root` first):
+If your Linux distributions provides no official Python 3 packages in its package management system (i.e., `apt`, `yum`, `dnf`, `pkg` ., etc.), you can manually install Python 3.7 by steps listed as follows, with elevated user privileges (e.g., `sudo` with each command or `su - root` first):
 1. Make sure that all dependencies of building Python is satisfied, including `gcc`, `bzip2-devel`, `openssl-devel` and `libffi-devel`. You can installed by the commands listed below if your Linux distribution matches one of them:
     - On Ubuntu, or Debian:
         ```
