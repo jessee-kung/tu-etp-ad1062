@@ -4,6 +4,18 @@
 
 For more information, please refer to: https://sites.google.com/view/tu-ad1062-mlfundamentals/
 
+## Table of contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Frequently Asked Questions](#frequently-asked-questions)
+    - [May I use Python 2.7?](#1-may-i-use-python-27)
+    - [May I use Anaconda or WinPython?](#2-may-i-use-anaconda-or-winpython)
+    - [Keeps showing "No module named 'theano'" error?](#3-keeps-showing-no-module-named-theano-error)
+- [Appendix](#appendix)
+    - [How to Install Python 3.7 and Related Dependencies Manually?](#how-to-install-python-37-and-related-dependencies-manually)
+        - [Windows](#windows)
+        - [macOS](#macos)
+        - [Linux](#linux)
 ----
 ## Installation
 All jupyter notebook sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please follow the steps listed below:
@@ -57,12 +69,12 @@ Here's the summary of each `*.ipynb`:
     * Dimension reduction of PCA, LDA, and t-SNE
 
 ----
-## Frequently Asked Questions:
+## Frequently Asked Questions
 ### 1. May I use Python 2.7?
 Not recommended. Sample code are tested with Python 3.x only.
 
 ### 2. May I use Anaconda or WinPython?
-You can also use Anaconda or WinPython based on Python 3, too. But it is not required, due to these integrated packages provides more components which may not used in this course (and occupies more disk space). You also have to install Keras and Tensorflow later after you install the Anaconda or WinPython.
+You can also use Anaconda or WinPython based on Python 3, too. But it is not required, due to these integrated packages provides more components which may not be used in this course (and occupies more disk space). You also have to install Keras and Tensorflow later once you have your Anaconda or WinPython installed.
 
 ### 3. Keeps showing "No module named 'theano'" error?
 If you already have an earlier version of Keras installed, make sure the value of `backend` attribute should be `tensorflow`:
