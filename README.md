@@ -6,6 +6,8 @@ For more information, please refer to: https://sites.google.com/view/tu-ad1062-m
 
 ## Table of contents
 - [Installation](#installation)
+    - [Option 1. Setup the Environment Manually](#option-1-setup-the-environment-manually)
+    - [Option 2. Setup the Environment by Docker](#option-2-setup-the-environment-by-docker)
 - [Usage](#usage)
 - [Frequently Asked Questions](#frequently-asked-questions)
     - [May I use Python 2.7?](#1-may-i-use-python-27)
@@ -16,12 +18,14 @@ For more information, please refer to: https://sites.google.com/view/tu-ad1062-m
         - [Windows](#windows)
         - [macOS](#macos)
         - [Linux](#linux)
-    - [How to Use Docker for Environment Setup?](#how-to-use-docker-for-environment-setup)
 ----
 ## Installation
-All jupyter notebook sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please follow the steps listed below:
+All jupyter notebook sample code are developed based on Python 3, Scikit-Learn and Tensorflow with Keras front-end. To execute the sample code, please select **one** of methods listed below:
+
+### Option 1. Setup the Environment Manually
+Please follow the steps listed below:
 1. Install Python 3.7
-(For more details, see: [Appendix：How to Install Python 3.7 and Related Dependencies Manually?](#appendix))
+(For more details, see: [Appendix：How to Install Python 3.7 and Related Dependencies Manually?](#how-to-install-python-37-and-related-dependencies-manually))
 2. Clone the git repository:
     ```
     $ git clone https://github.com/jessee-kung/tu-etp-ad1062.git
@@ -45,11 +49,38 @@ All jupyter notebook sample code are developed based on Python 3, Scikit-Learn a
 
 Done!
 
+### Option 2. Setup the Environment by Docker
+If you already have Docker installed on your machine, then you can simply build an image from the `Dockefile`, and bind mount the project folder into the container as the Jupyter notebook working directory.  There is also a prepared Makefile for simplifing the steps with 4 pre-defined targets:
+1. Build Docker image. By default the image will be named `tu-etp-ad1062:pynb`
+    ```
+    $ make build
+    ```
+2. Start server. The server will listen on port `8888`. Once the server is started, there should be a message showing you the secret token for your notebook.
+    ```
+    $ make start
+    ```
+3. Stop server.
+    ```
+    $ make stop
+    ```
+4. Clean Docker image. If you want to rebuild the Docker image or you have finished the course, then you are free to remove the image.
+    ```
+    $ make clean
+    ```
+
+> #### Acknowledgements:
+> Thanks to [Chuck Lin](https://github.com/chucklin) for the Dockerfile!
+
 ----
 ## Usage
 Launch jupyter notebook for execution of sample code and playground:
 ```
 $ jupyter notebook
+```
+
+If the environment is installed by Docker, simply launch jupyter notebook as follows:
+```
+$ make start
 ```
 
 Here's the summary of each `*.ipynb`: 
@@ -141,22 +172,4 @@ If your Linux distributions provides no official Python 3 packages in its packag
 5. Make sure your Python 3.7 is worked:
     ```
     python3 --version
-    ```
-### How to Use Docker for Environment Setup?
-If you have Docker installed on your machine, then you can simply build an image from the Dockefile, and bind mount the project folder into the container as the Jupyter notebook working directory.  There is also a prepared Makefile for simplifing the steps with 4 pre-defined targets.
-1. Build Docker image. By default the image will be named `tu-etp-ad1062:pynb`
-    ```
-    $ make build
-    ```
-2. Start server. The server will listen on port `8888`. Once the server is started, there should be a message showing you the secret token for your notebook.
-    ```
-    $ make start
-    ```
-3. Stop server.
-    ```
-    $ make stop
-    ```
-4. Clean Docker image. If you want to rebuild the Docker image or you have finished the course, then you are free to remove the image.
-    ```
-    $ make clean
     ```
