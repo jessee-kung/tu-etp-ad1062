@@ -41,10 +41,10 @@ Please follow the steps listed below:
         ```
         $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python
         ```
-    - Or navigate to the folder of git repository, then install the dependencies by `requirement.txt` as below :
+    - Or navigate to the folder of git repository, then install the dependencies by `requirements.txt` as below :
         ```
         $ cd tu-etp-ad1062
-        $ pip3 install -r requirement.txt 
+        $ pip3 install -r requirements.txt 
         ```
 
 Done!
