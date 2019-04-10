@@ -42,7 +42,7 @@ class Gaussian(object):
                 X = numpy.random.multivariate_normal(param.mean, param.cov, param.N)
 
                 if label_type == 'positive_negative':
-                    y = numpy.ones(param.N, int) * -1
+                    y = numpy.ones(param.N, int) * 1
                 else:
                     y = numpy.ones(param.N, int) * idxK
             else:
@@ -50,7 +50,7 @@ class Gaussian(object):
                 X = numpy.append(X, X2, 0)
 
                 if label_type == 'positive_negative':
-                    y2 = numpy.ones(param.N, int) * 1
+                    y2 = numpy.ones(param.N, int) * -1
                 else:
                     y2 = numpy.ones(param.N, int) * idxK
                 y = numpy.append(y, y2, 0)
