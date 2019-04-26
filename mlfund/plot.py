@@ -5,6 +5,9 @@ import re
 
 import sklearn.svm
 
+from sklearn.metrics import confusion_matrix
+from sklearn.utils.multiclass import unique_labels
+
 from mpl_toolkits.mplot3d import axes3d, Axes3D
 
 class ColorHelper(object):
@@ -30,6 +33,7 @@ class PlotBase(object):
         self.palette = ['#0000FF', '#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#00FFFF', '#000088', '#880000', '#008800', '#888800', '#880088', '#008888']
         for i in range(0, len(self.palette)):
             self.palette[i] = ColorHelper.mix_alpha(self.palette[i], 0.4)
+        self._labels = None
             
     def legend(self):
         self.ax.legend()
@@ -48,20 +52,22 @@ class PlotBase(object):
 
     def save2Eps(self, filename):
         plt.savefig(filename, format='eps', dpi=300)
+
+    def set_labels(self, labels):
+        assert isinstance(labels, list)
+        self._labels = numpy.array(labels)
         
     
 class Plot3D(PlotBase):
-    def __init__(self):
+    def __init__(self, figsize=(10,8)):
         PlotBase.__init__(self)
-        self.fig = plt.figure(figsize=(10,8))
+        self.fig = plt.figure(figsize=figsize)
         self.ax = Axes3D(self.fig)
         
-    def scatter(self, X, y):
+    def scatter(self, X, y, annotates=None):
+        assert isinstance(X, numpy.ndarray)
+
         c_idx = 0
-
-        if not isinstance(X, numpy.ndarray):
-            raise TypeError("Argument 'X' is not an instance of 'numpy.ndarray'")
-
         if X.shape[1] > 3:
             warnings.warn("Dimension of samples exceeds 3, only plot the first-3 dimension")
             
@@ -71,21 +77,28 @@ class Plot3D(PlotBase):
                 return
 
             Xk = X[y == yk, :]
-            self.ax.scatter(Xk[:, 0], Xk[:, 1],Xk[:,2], c=self.palette[c_idx], s=20, label=('Class %d' % (c_idx+1)), edgecolors='none')
+
+            label = ('Class %d' % (c_idx+1))
+            if self._labels is not None:
+                label = self._labels[c_idx]
+            self.ax.scatter(Xk[:, 0], Xk[:, 1], Xk[:, 2], c=self.palette[c_idx], s=20, label=label, edgecolors='none')
 
             c_idx = c_idx + 1
 
+        if annotates is not None:
+            for i, annotate in enumerate(annotates):
+                self.ax.annotate(annotate, (X[i, 0], X[i, 1], X[i, 2]))
+
+
 class Plot2D(PlotBase):
-    def __init__(self):
+    def __init__(self, figsize=(10,8)):
         PlotBase.__init__(self)
-        self.fig, self.ax = plt.subplots(figsize=(10,8))
+        self.fig, self.ax = plt.subplots(figsize=figsize)
 
-    def scatter(self, X, y):
+    def scatter(self, X, y, annotates=None):
+        assert isinstance(X, numpy.ndarray)
+        
         c_idx = 0
-
-        if not isinstance(X, numpy.ndarray):
-            raise TypeError("Argument 'X' is not an instance of 'numpy.ndarray'")
-
         if X.shape[1] > 2:
             warnings.warn("Dimension of samples exceeds 2, only plot the first-2 dimension")
 
@@ -95,17 +108,26 @@ class Plot2D(PlotBase):
                 return
 
             Xk = X[y == yk, :]
-            self.ax.scatter(Xk[:, 0], Xk[:, 1], c=self.palette[c_idx], s=20, label=('Class %d' % (c_idx+1)), edgecolors='none')
+
+            label = ('Class %d' % (c_idx+1))
+            if self._labels is not None:
+                label = self._labels[c_idx]
+            self.ax.scatter(Xk[:, 0], Xk[:, 1], c=self.palette[c_idx], s=20, label=label, edgecolors='none')
 
             c_idx = c_idx + 1
 
-    def scatterCSVC(self, clf):
-        if isinstance(clf, sklearn.svm.SVC):
-            indices_relaxed = (clf.C - numpy.abs(clf.dual_coef_) < 1e-6).ravel()
-            indices_sv = numpy.invert(indices_relaxed).ravel()
+        if annotates is not None:
+            for i, annotate in enumerate(annotates):
+                self.ax.annotate(annotate, (X[i, 0], X[i, 1]))
 
-            self.ax.scatter(clf.support_vectors_[indices_relaxed,0], clf.support_vectors_[indices_relaxed,1], s=75, marker='*', facecolors='none', edgecolors='r')
-            self.ax.scatter(clf.support_vectors_[indices_sv,0], clf.support_vectors_[indices_sv,1], s=100, facecolors='none', edgecolors='k')
+    def scatterCSVC(self, clf):
+        assert isinstance(clf, sklearn.svm.SVC)
+
+        indices_relaxed = (clf.C - numpy.abs(clf.dual_coef_) < 1e-6).ravel()
+        indices_sv = numpy.invert(indices_relaxed).ravel()
+
+        self.ax.scatter(clf.support_vectors_[indices_relaxed,0], clf.support_vectors_[indices_relaxed,1], s=75, marker='*', facecolors='none', edgecolors='r')
+        self.ax.scatter(clf.support_vectors_[indices_sv,0], clf.support_vectors_[indices_sv,1], s=100, facecolors='none', edgecolors='k')
 
     def classifierContour(self, X, y, clf):
         if clf is None or ( clf is not None and type(clf.predict) is 'function'):
@@ -151,3 +173,31 @@ class Plot2D(PlotBase):
         axis0_grid, axis1_grid = numpy.meshgrid(numpy.arange(axis0_min, axis0_max, 0.01), numpy.arange(axis1_min, axis1_max, 0.01))
         
         return axis0_grid, axis1_grid
+
+class PlotMetric(PlotBase):
+    def __init__(self, figsize=(16,16)):
+        PlotBase.__init__(self)
+        self.fig, self.ax = plt.subplots(figsize=figsize)
+
+    def confusion_matrix(self, y_true, y_predict, normalize=True):
+        title = 'Confusion Matrix'
+        if normalize:
+            title = '%s %s' % ('Normalized', title)
+
+        cm = confusion_matrix(y_true, y_predict)
+        if normalize:
+            cm = cm.astype('float') / cm.sum(axis=1)[:, numpy.newaxis]
+
+        classes = self._labels[unique_labels(y_true, y_predict)]
+        im = self.ax.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+
+        self.ax.figure.colorbar(im, ax=self.ax)
+        self.ax.set(xticks=numpy.arange(cm.shape[1]), yticks=numpy.arange(cm.shape[0]), xticklabels=classes, yticklabels=classes, title=title, ylabel='Ground-truth label', xlabel='Predicted label')
+        plt.setp(self.ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+
+        fmt = '.3f' if normalize else 'd'
+        thresh = cm.max() / 2.
+        for i in range(cm.shape[0]):
+            for j in range(cm.shape[1]):
+                self.ax.text(j, i, format(cm[i, j], fmt), ha="center", va="center", color="white" if cm[i, j] > thresh else "black")
+        self.fig.tight_layout()
