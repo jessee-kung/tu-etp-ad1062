@@ -39,7 +39,7 @@ Please follow the steps listed below:
 4. Install all dependencies:
     - You can do it by:
         ```
-        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python
+        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python pillow pandas
         ```
     - Or navigate to the folder of git repository, then install the dependencies by `requirements.txt` as below :
         ```
