@@ -39,7 +39,7 @@ Please follow the steps listed below:
 4. Install all dependencies:
     - You can do it by:
         ```
-        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python
+        $ pip3 install sklearn jupyter matplotlib tensorflow keras keras-rl lightgbm graphviz opencv-python pillow pandas
         ```
     - Or navigate to the folder of git repository, then install the dependencies by `requirements.txt` as below :
         ```
@@ -84,20 +84,35 @@ $ make start
 ```
 
 Here's the summary of each `*.ipynb`: 
-* **demo01.ipynb**: Ch1. Overview
+* **demo_01.ipynb**: Ch1. Overview
     * Load the Keras built-in MNIST dataset
     * Vector and matrix visualization and operations
     * Training set, validation set, and testing set separation
-* **demo02.ipynb**: Ch2. Linear Classifiers
+* **demo_02.ipynb**: Ch2. Linear Classifiers
     * Perceptron
     * Support Vector Machine (SVM) - Linear scenario
-* **demo03.ipynb**: Ch3. Non-Linear Classifiers
+* **demo_03.ipynb**: Ch3. Non-Linear Classifiers
     * Multi-Layer Perceptron
     * Support Vector Machine (SVM) - Non-Linear scenario
     * Decision Tree Classifier
     * Gradient Boosting
-* ...
-* **demo08.ipynb**: Ch8. Dimension Reduction
+* **demo_04.ipynb**: Ch4. Convolutional Neural Network
+    * Convolutional Neural Network on Images
+        * Use CNN For MNIST classification
+        * Bases observation
+    * Convolutional Neural Network on Texts
+        * Use CNN For IMDB movie comment dataset classification
+    * Pre-trained models
+        * Use InceptionV3 for wild-image classifications
+* **demo_05.ipynb**: Ch5. Sequential Learning
+    * Text data pre-processing steps:
+        * Tokenization
+        * Top-K words encoding (Based on occurrences)
+        * Word2Vec convert with GloVe
+    * Classification with LSTM
+* **demo_06.ipynb**: Ch6. Generative Adversarial Network
+    * TBD
+* **demo_07.ipynb**: Ch7. Dimension Reduction
     * Dimension reduction of PCA, LDA, and t-SNE
 
 ----
