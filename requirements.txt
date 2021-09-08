@@ -71,5 +71,5 @@ wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.15.3
 widgetsnbextension==3.4.2
-Pillow==6.2.0
+Pillow==8.3.2
 pandas==0.24.1
